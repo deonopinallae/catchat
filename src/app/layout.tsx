@@ -1,11 +1,19 @@
 import type { Metadata } from 'next'
-import { Lexend_Deca } from 'next/font/google'
+import { Lato, Mulish } from 'next/font/google'
 import { AppColumn } from '@/shared/ui/layout/app-column'
 import { TanstackProvider } from '@/shared/providers/query-client-provider'
 import '@/styles/global.scss'
 
-const lexendDeca = Lexend_Deca({
+const mulish = Mulish({
 	subsets: ['latin'],
+	weight: ['400', '600', '700'],
+	variable: '--font-mulish',
+})
+
+const lato = Lato({
+	subsets: ['latin'],
+	weight: ['400', '700'],
+	variable: '--font-lato',
 })
 
 export const metadata: Metadata = {
@@ -20,7 +28,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${lexendDeca.className} antialiased`}>
+			<body className={`${mulish.variable} ${lato.variable} antialiased`}>
 				<TanstackProvider>
 					<AppColumn>{children}</AppColumn>
 				</TanstackProvider>

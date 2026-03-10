@@ -4,7 +4,7 @@ import { Page } from '@/shared/ui'
 export default function Layout({ children }: PropsWithChildren<unknown>) {
 	return (
 		<>
-			<Page className="text-center justify-end">{children}</Page>
+			<Page className="items-center justify-end text-center">{children}</Page>
 		</>
 	)
 }

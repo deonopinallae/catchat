@@ -1,13 +1,15 @@
 //app
 :root {
-	--app-max-width: 1923px;
-	--container-min-padding: 0 1.38rem;
-	--container-max-padding: 0 3.38rem;
-	--app-bg-color: #ffffff;
+	--app-max-width: 24rem;
+	--container-min-padding: 0 1rem;
+	--container-max-padding: 0 1.5rem;
+	--app-bg-color: #e0e0e0;
+	--color-main: #808080;
 }
 
 //fonts
 :root {
-	--font-family-main: 'Lexend Deca', sans-serif;
-	--font-color-main: #000000;
+	--font-color-main: #1d1d1d;
+	--font-family-main: var(--font-mulish), sans-serif;
+	--font-family-accent: var(--font-lato), sans-serif;
 }
