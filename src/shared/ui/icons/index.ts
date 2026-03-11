@@ -1,1 +1,5 @@
 export * from './back-icon'
+export * from './home-icon'
+export * from './contacts-icon'
+export * from './chats-icon'
+export * from './more-icon'
