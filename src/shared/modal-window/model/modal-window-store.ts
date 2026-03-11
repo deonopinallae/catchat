@@ -7,7 +7,7 @@ interface ModalStore {
 	close: () => void
 }
 
-export const useModalStore = createStore<ModalStore>((set, get) => ({
+export const useModalStore = createStore<ModalStore>((set) => ({
 	isOpen: false,
 	open: () => set({ isOpen: true }),
 	close: () => set({ isOpen: false }),

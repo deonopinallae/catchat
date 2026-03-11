@@ -17,7 +17,7 @@ export default function WelcomePage() {
 					Terms & Privacy Policy
 				</Link>
 				<Button type="button" onClick={() => router.push('/auth')}>
-					Let's friending!
+					Let&apos;s friending!
 				</Button>
 			</div>
 		</div>

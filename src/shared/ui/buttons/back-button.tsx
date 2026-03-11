@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes } from 'react'
 import { BackIcon } from '@/shared/ui/icons'
 
-interface BackButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
+type BackButtonProps = ButtonHTMLAttributes<HTMLButtonElement>
 
 export const BackButton = ({ className, ...props }: BackButtonProps) => {
 	return (

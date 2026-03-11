@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { initializeAuth } from '../model/auth-helpers'
 import { LoadingOverlay } from '@/shared/ui'

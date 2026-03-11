@@ -4,7 +4,12 @@ import { useAuthStore } from './auth-store'
 import { AuthStateTypes } from './auth-types'
 import { getApiErrorMessage } from '@/shared/lib/api-error'
 
-export const startRefreshTokenTimer = (set: any, get: () => AuthStateTypes) => {
+type AuthStateSetter = (state: Partial<AuthStateTypes>) => void
+
+export const startRefreshTokenTimer = (
+	set: AuthStateSetter,
+	get: () => AuthStateTypes,
+) => {
 	if (get().refreshTokenTimer) clearTimeout(get().refreshTokenTimer)
 
 	const timer = window.setTimeout(
