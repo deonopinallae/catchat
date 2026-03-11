@@ -7,12 +7,7 @@ import { BackButton, Button, ErrorMessage } from '@/shared/ui'
 import { LoadingMessage } from '@/shared/ui/loading-message'
 import { useAuthForm } from '@/features/auth/model/use-auth-form'
 import { AuthDto } from '@/features/auth/model/auth-types'
-import {
-	checkPhoneNumber,
-	login,
-	register as registerByPhone,
-} from '@/features/auth/api/auth-repository'
-import { useAuthStore } from '@/features/auth/model/auth-store'
+import { sendVerificationCode } from '@/features/auth/api/auth-repository'
 import { useRouter } from 'next/navigation'
 import { PAGES } from '@/shared/lib/pages.config'
 import { PhoneKeypad } from '@/features/auth/ui/phone-keypad'
@@ -23,7 +18,6 @@ export default function AuthPage() {
 	const [error, setError] = useState<string>('')
 	const [selectedDialCode, setSelectedDialCode] = useState('+62')
 	const router = useRouter()
-	const { setAccessToken } = useAuthStore.getState()
 
 	const { register, handleSubmit, reset, setValue, watch, errors, isSubmitting } =
 		useAuthForm()
@@ -48,12 +42,10 @@ export default function AuthPage() {
 					: `${selectedDialCode}${data.phoneNumber}`,
 			}
 
-			const { exists } = await checkPhoneNumber(normalizedPayload)
-			const response = exists
-				? await login(normalizedPayload)
-				: await registerByPhone(normalizedPayload)
-			setAccessToken(response.accessToken)
-			router.push(PAGES.HOME)
+			await sendVerificationCode(normalizedPayload)
+			router.push(
+				`${PAGES.VERIFY}?phone=${encodeURIComponent(normalizedPayload.phoneNumber)}`,
+			)
 			reset()
 		} catch (error) {
 			setError(getAuthErrorMessage(error))

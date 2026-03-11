@@ -16,7 +16,9 @@ export const request = async <T, D = undefined>(
 		url === ENDPOINTS.auth.login ||
 		url === ENDPOINTS.auth.register ||
 		url === ENDPOINTS.auth.refreshToken ||
-		url === ENDPOINTS.auth.checkPhone
+		url === ENDPOINTS.auth.checkPhone ||
+		url === ENDPOINTS.auth.sendCode ||
+		url === ENDPOINTS.auth.verifyCode
 
 	if (!accessToken && !isPublicAuthEndpoint) {
 		throw { statusCode: 401, message: 'Unauthorized' }

@@ -8,6 +8,16 @@ export interface PhoneCheckResponse {
 	exists: boolean
 }
 
+export interface VerifyCodeDto {
+	phoneNumber: string
+	code: string
+}
+
+export interface SendCodeResponse {
+	success: boolean
+	message?: string
+}
+
 export interface AuthTokens {
 	accessToken: string
 	refreshToken: string
