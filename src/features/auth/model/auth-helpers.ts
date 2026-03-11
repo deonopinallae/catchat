@@ -28,8 +28,46 @@ export const initializeAuth = async () => {
 		const { accessToken } = await refreshAccessToken()
 		setAccessToken(accessToken)
 		setIsHydrated(true)
-		
 	} catch {
 		setLogout()
 	}
+}
+
+const FALLBACK_AUTH_ERROR_MESSAGE =
+	'Не удалось выполнить вход. Проверьте номер телефона и попробуйте ещё раз позже.'
+
+export const getAuthErrorMessage = (error: unknown) => {
+	if (error && typeof error === 'object' && 'message' in error) {
+		const message = (error as { message?: unknown }).message
+
+		if (Array.isArray(message)) {
+			return message.filter(Boolean).join(', ') || FALLBACK_AUTH_ERROR_MESSAGE
+		}
+
+		if (typeof message === 'string') {
+			const normalizedMessage = message.toLowerCase()
+			if (
+				normalizedMessage.includes('unexpected token') ||
+				normalizedMessage.includes('not valid json')
+			) {
+				return FALLBACK_AUTH_ERROR_MESSAGE
+			}
+
+			return message
+		}
+	}
+
+	if (error instanceof Error) {
+		const normalizedMessage = error.message.toLowerCase()
+		if (
+			normalizedMessage.includes('unexpected token') ||
+			normalizedMessage.includes('not valid json')
+		) {
+			return FALLBACK_AUTH_ERROR_MESSAGE
+		}
+
+		return error.message || FALLBACK_AUTH_ERROR_MESSAGE
+	}
+
+	return FALLBACK_AUTH_ERROR_MESSAGE
 }

@@ -1,8 +1,11 @@
-import { UserDto } from '@/entites/user-profile/model/user-types'
+import { UserDto } from '@/entities/user-profile/model/user-types'
 
 export interface AuthDto {
-	email: string
-	password: string
+	phoneNumber: string
+}
+
+export interface PhoneCheckResponse {
+	exists: boolean
 }
 
 export interface AuthTokens {
@@ -14,12 +17,6 @@ export interface AuthResponse {
 	user: UserDto
 	accessToken: string
 	refreshToken: string
-}
-
-export interface FormProps {
-	title: string
-	onSubmitAction: (data: AuthDto) => Promise<void>
-	link: { name: string; url: string }
 }
 
 export interface AuthStateActions {

@@ -1,4 +1,5 @@
 export * from './buttons/button'
+export * from './buttons/back-button'
 export * from './input'
 export * from './layout/header/home-header'
 export * from './layout/footer/footer'

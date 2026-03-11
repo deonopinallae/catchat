@@ -12,12 +12,13 @@ export const request = async <T, D = undefined>(
 	retry = true,
 ): Promise<T> => {
 	const { accessToken } = useAuthStore.getState()
+	const isPublicAuthEndpoint =
+		url === ENDPOINTS.auth.login ||
+		url === ENDPOINTS.auth.register ||
+		url === ENDPOINTS.auth.refreshToken ||
+		url === ENDPOINTS.auth.checkPhone
 
-	if (
-		!accessToken &&
-		url !== ENDPOINTS.auth.refreshToken &&
-		url !== ENDPOINTS.auth.login
-	) {
+	if (!accessToken && !isPublicAuthEndpoint) {
 		throw { statusCode: 401, message: 'Unauthorized' }
 	}
 
@@ -31,12 +32,7 @@ export const request = async <T, D = undefined>(
 		body: data ? JSON.stringify(data) : undefined,
 	})
 
-	if (
-		res.status === 401 &&
-		retry &&
-		url !== ENDPOINTS.auth.login &&
-		url !== ENDPOINTS.auth.refreshToken
-	) {
+	if (res.status === 401 && retry && !isPublicAuthEndpoint) {
 		try {
 			await refreshAccessToken()
 			return request<T, D>(url, method, data, false)
