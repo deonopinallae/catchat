@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
 	useEffect(() => {
 		if (isHydrated && !accessToken) {
-			router.push(PAGES.LOGIN)
+			router.push(PAGES.WELCOME)
 		}
 	}, [isHydrated, accessToken, router])
 
